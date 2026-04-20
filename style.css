@@ -1,0 +1,52 @@
+body {
+ font-family:  verdana, Geneva, sans-serif;
+ background: #3345ad;
+ color:#57c855;
+ display: flex;
+    justify-content: center;
+    align-items: center;
+    height:auto;
+
+}
+
+.player {
+    background: #0a495d;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 650px;
+    text-align: center;
+}
+
+button {
+    margin: 5px;
+    padding: 10px;
+    border: none;
+    border-radius: 7px;
+    cursor: pointer
+}
+
+button:hover {
+    background: #a30498ac;
+    color: rgb(210, 213, 118);
+}
+
+#playPause {
+    background: #61c034;
+    color: #6a55c8;
+}
+
+#playPause:hover {
+    background: #a30498ac;
+    color: rgb(210, 213, 118);
+}
+
+#stop {
+    background: #630305;
+    color: white;
+}
+
+#stop:hover {
+    background: #a30498ac;
+    color: rgb(210, 213, 118);
+}
