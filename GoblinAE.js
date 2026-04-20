@@ -20,7 +20,7 @@ fileInput.addEventListener("change", function() {
 
         status.textContent = `Loaded: ${file.name}`;
         // updates status to show the name of the loaded file
-    
+    console.log(`Loaded file: ${file.name}`);
     }
 });
 
@@ -31,6 +31,10 @@ playPause.addEventListener("click", function() {
             audio.play();
             playPause.textContent = "Pause";
             status.textContent = "Playing";
+        } else {
+            audio.pause();
+            playPause.textContent = "Play";
+            status.textContent = "Paused";
         }
     }
 });
@@ -38,8 +42,6 @@ playPause.addEventListener("click", function() {
 
 
 //stop button functionality
-
-const stop = document.getElementById('stop');
 
     stop.addEventListener("click", function() {
     audio.pause();
