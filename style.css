@@ -59,7 +59,7 @@ button:hover {
     opacity: 0.6;
     justify-content: center;
     margin-top: 20px auto;
-    background: url('assets/Digital\ Jolly\ Roger.png') ;
+    background: url("assets/Digital Jolly Roger.png") ;
     background-size: contain;
     background-repeat: no-repeat;
 }
