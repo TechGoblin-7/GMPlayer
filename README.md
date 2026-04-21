@@ -24,11 +24,12 @@ This project allows users to load and play local audio files directly in the bro
 ---
 ## Project Structure 
 
-Music player/
----GMPlayer.html
----style.css
----GoblinAE.js
----README.md
+music-player/
+│
+├── index.html
+├── style.css
+├── script.js
+└── README.md
 
 
 ---
@@ -43,7 +44,9 @@ cd GMPlayer
 
 run GMPlayer.html
 
-## 🎮 How to Use
+---
+
+🎮 How to Use
 Click Choose File
 Select an audio file from your computer
 Press Play
