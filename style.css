@@ -6,6 +6,7 @@ body {
     justify-content: center;
     align-items: center;
     height:auto;
+    flex-direction: column;
 
 }
 
@@ -49,4 +50,21 @@ button:hover {
 #stop:hover {
     background: #a30498ac;
     color: rgb(210, 213, 118);
+}
+
+.logo {
+    width: 175px;
+    height: 175px;
+    display: flex;
+    opacity: 0.6;
+    justify-content: center;
+    margin-top: 20px auto;
+    background: url('assets/Digital\ Jolly\ Roger.png') ;
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+.logo:hover {
+   transform: rotate(360deg);
+    transition: transform 0.5s ease;
 }
