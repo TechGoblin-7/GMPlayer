@@ -1,28 +1,68 @@
+const playlist = [];
+const currentTrackIndex = 0;
 const fileInput = document.getElementById('fileInput');
-const audio = document.getElementById('audio');
+const audio = document.getElementById('audio')
 const playPause = document.getElementById('playPause');
 const stop = document.getElementById('stop');
 const status = document.getElementById('status');
 
-// Load audio file
-fileInput.addEventListener("change", function() {
-    const file = this.files[0];
 
-// this.files[0] means this = file input element, files = list of selected files,
-// [0] = first file (since we only allow one file to be selected)
-    if(file) {
+
+// Load audio files
+fileInput.addEventListener("change", function() {
+    const files = Array.from(this.files);
+
+    files.forEach(file => {
         const url = URL.createObjectURL(file);
 
-        //This creates a temporary URL for the selected file, allowing us to play it without uploading it anywhere.
-
-        audio.src = url;
-        // sets audio to that url, so it can be played
-
-        status.textContent = `Loaded: ${file.name}`;
-        // updates status to show the name of the loaded file
-    console.log(`Loaded file: ${file.name}`);
-    }
+        playlist.push({
+            name: file.name,
+            url: url
+        });
+    });
+    
+    renderPlaylist();
+    status.textContent = `${playlist.length} song(s) loaded`;
 });
+
+
+function renderPlaylist() {
+    const list = document.getElementById("playlist");
+    list.innerHTML = "";
+
+    playlist.forEach((track, index) => {
+        const li = document.createElement("li");
+        li.textContent = track.name;
+
+        li.addEventListener("click", () => {
+            playTrack(index);
+        
+        });
+
+        list.appendChild(li);
+    });
+}
+
+function playTrack(index) {
+    const track = playlist[index]
+
+    audio.src = track.url;
+    audio.play();
+
+    currentTrackIndex = index;
+    status.textContent = `Playing: ${track.name}`;
+
+    highlightActive();
+}
+
+function highlightActive() {
+    const items = document.querySelectorAll("playlist li");
+
+    items.forEach((item, i) => {
+        item.classList.toggle("active-track", i === currentTrackIndex);
+    });
+
+}
 
 //playPause button functionality
 playPause.addEventListener("click", function() {

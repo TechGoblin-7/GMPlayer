@@ -52,11 +52,38 @@ button:hover {
     color: rgb(210, 213, 118);
 }
 
+.playlist {
+    margin-top: 20px;
+    width: 300px;
+    text-align: left;
+}
+
+.playlist ul {
+    list-style: none;
+    padding: 2px;
+
+}
+
+.playlist li {
+    padding: 8px;
+    cursor: pointer;
+    border-bottom: 1px solid #7f6855
+}
+
+.playlist li:hover {
+    background-color: #eee;
+}
+
+.active-track {
+    background-color: #ccc;
+
+}
+
 .logo {
     width: 175px;
     height: 175px;
     display: flex;
-    opacity: 0.6;
+    opacity: 0.4;
     justify-content: center;
     margin-top: 20px auto;
     background: url("assets/Digital Jolly Roger.png") ;
@@ -65,6 +92,6 @@ button:hover {
 }
 
 .logo:hover {
-   transform: rotate(360deg);
+   transform: rotate(755deg);
     transition: transform 0.5s ease;
 }
