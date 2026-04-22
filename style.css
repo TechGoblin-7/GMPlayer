@@ -83,7 +83,7 @@ button:hover {
     width: 175px;
     height: 175px;
     display: flex;
-    opacity: 0.4;
+    opacity: 0.2;
     justify-content: center;
     margin-top: 20px auto;
     background: url("assets/Digital Jolly Roger.png") ;
@@ -94,4 +94,20 @@ button:hover {
 .logo:hover {
    transform: rotate(755deg);
     transition: transform 0.5s ease;
+}
+
+.repo-footer {
+    margin-top: 20px;
+    font-size: 12px;
+    opacity: 0.6;
+    text-align: center;
+
+}
+
+.repo-footer a {
+    color: inherit ;
+    text-decoration: none;
+}
+.repo-footer a:hover {
+    text-decoration: underline;
 }
