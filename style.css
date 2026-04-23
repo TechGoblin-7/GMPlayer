@@ -52,6 +52,24 @@ button:hover {
     color: rgb(210, 213, 118);
 }
 
+.progress-container {
+    width: 100%;        /* Full width of the player */
+    height: 10px;   /* Height of the progress bar */    
+    background: #2c6c94;        /* Background color of the progress bar container */
+    border-radius: 5px;     /* Rounded corners */
+    margin: 15px auto;   /* Center the progress bar and add some margin */
+    cursor: pointer;   /* Change cursor to pointer on hover */
+}
+
+.progress {
+    height: 100%;     /* Full height of the container */
+    width: 0%;        /* Initial width (0% means no progress) */
+    background: #57c855;     /* Color of the progress bar */
+    border-radius: 5px;     /* Rounded corners */
+
+    transition: width 0.1s linear; /* Smooth transition for width changes */
+}
+
 .playlist {
     margin-top: 20px;
     width: 300px;

@@ -5,7 +5,10 @@ const audio = document.getElementById('audio')
 const playPause = document.getElementById('playPause');
 const stop = document.getElementById('stop');
 const status = document.getElementById('status');
-
+//The Clickable area for the progress bar
+const progressContainer = document.getElementById('progressContainer');
+//the inner fill that fills/grows as the song progresses
+const progress = document.getElementById('progress');
 
 
 // Load audio files
@@ -89,3 +92,37 @@ playPause.addEventListener("click", function() {
     status.textContent = "Stopped";
     });
     // The stop button pauses the audio and resets the current time to 0, effectively stopping the playback and allowing it to be played again from the beginning. It also updates the status to "Stopped".
+
+    //This event listener updates the progress bar as the audio plays
+    audio.addEventListener("timeupdate", function() {
+        //audio.duration is the total length of the audio in seconds, and audio.currentTime is the current playback position in seconds. By dividing currentTime by duration, we get a value between 0 and 1 that represents how much of the audio has been played. Multiplying by 100 converts this to a percentage, which we can use to set the width of the progress bar.
+        //audio.currentTime is the current playback position in seconds, and audio.duration is the total length of the audio in seconds. By dividing currentTime by duration, we get a value between 0 and 1 that represents how much of the audio has been played. Multiplying by 100 converts this to a percentage, which we can use to set the width of the progress bar.
+    
+        if(audio.duration) {
+            // Calculate the percentage of the audio that has been played
+            const progressPercent = (audio.currentTime / audio.duration) * 100;
+
+            // Example:
+            //currentTime = 30 seconds, duration = 120 seconds
+            //progressPercent = (30 / 120) * 100 = 25%
+
+            //set the width of the progress bar to reflect the current playback position
+            progress.style.width = `${progressPercent}%`;
+
+            //Example:
+            // "25%" will set the width of the progress bar to 25% of its container, visually indicating that 25% of the audio has been played.
+        }
+    });
+
+    progressContainer.addEventListener("click", function(e) {
+        // Total width of the progress container
+        const width = this.clientWidth;
+        //Where the user clicked within the container
+        const clickX = e.offsetX;
+        // Total duration of the audio
+        const duration = audio.duration;
+        //Convert the click position to a time in the audio
+        audio.currentTime = (clickX / width) * duration;
+    });
+
+    //This event listener allows the user to click on the progress bar to seek to a different part of the audio. It calculates where the user clicked relative to the width of the progress container and sets the currentTime of the audio accordingly, allowing for interactive seeking through the track.
