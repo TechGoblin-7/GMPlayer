@@ -1,9 +1,11 @@
 const playlist = [];
-const currentTrackIndex = 0;
+let currentTrackIndex = 0;
 const fileInput = document.getElementById('fileInput');
 const audio = document.getElementById('audio')
 const playPause = document.getElementById('playPause');
 const stop = document.getElementById('stop');
+const prevBtn = document.getElementById('prev');
+const nextBtn = document.getElementById('next');
 const status = document.getElementById('status');
 //The Clickable area for the progress bar
 const progressContainer = document.getElementById('progressContainer');
@@ -22,6 +24,11 @@ fileInput.addEventListener("change", function() {
             name: file.name,
             url: url
         });
+
+        //Set current track to the newest entry
+        currentTrack = playlist.length -1;
+
+        loadTrack(currentTrack);
     });
     
     renderPlaylist();
@@ -46,6 +53,17 @@ function renderPlaylist() {
     });
 }
 
+function loadTrack(index) {
+
+    const track = playlist[index];
+
+    if(track) {
+        audio.src = track.url;
+
+        status.textContent = `Loaded: ${track.name}`;
+    }
+}
+
 function playTrack(index) {
     const track = playlist[index]
 
@@ -59,7 +77,7 @@ function playTrack(index) {
 }
 
 function highlightActive() {
-    const items = document.querySelectorAll("playlist li");
+    const items = document.querySelectorAll("#playlist li");
 
     items.forEach((item, i) => {
         item.classList.toggle("active-track", i === currentTrackIndex);
@@ -113,6 +131,52 @@ playPause.addEventListener("click", function() {
             // "25%" will set the width of the progress bar to 25% of its container, visually indicating that 25% of the audio has been played.
         }
     });
+
+    //Previous Button Functions
+
+    prevBtn.addEventListener("click", function () {
+
+        // If song is more then 3 Sec in restart song
+        if (audio.currentTime > 3) {
+            audio.currentTime = 0;
+            return;
+        }
+        // otherwise go to prev track
+        currentTrackIndex--;
+
+        if (currentTrackIndex < 0) {
+            currentTrackIndex = playlist.length -1;//loop to end
+        }
+
+        loadTrack(currentTrackIndex);
+        audio.play();
+        
+    });
+
+    //Next Button functions
+
+    nextBtn.addEventListener("click", function() {
+
+        console.log("Next clicked");
+        console.log("Before:", currentTrackIndex, playlist.length);
+
+        currentTrackIndex++;
+
+        //loop back to start if at end
+        if (currentTrackIndex >= playlist.length) {
+            currentTrackIndex = 0;
+        }
+
+        console.log("After:", currentTrackIndex)
+
+        loadTrack(currentTrackIndex);
+        audio.play()
+
+    });
+
+     audio.addEventListener("ended", function() {
+            nextBtn.click();
+        });
 
     progressContainer.addEventListener("click", function(e) {
         // Total width of the progress container

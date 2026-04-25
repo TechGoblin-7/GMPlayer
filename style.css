@@ -53,6 +53,26 @@ button:hover {
     color: rgb(210, 213, 118);
 }
 
+#prev {
+    background: #6a55c8;
+    color: #57c855;
+}
+
+#prev:hover {
+    background: #57c855;
+    color:#6a55c8;
+}
+
+#next {
+    background: #6a55c8;
+    color: #57c855;
+}
+
+#next:hover {
+    background: #57c855;
+    color: #6a55c8;
+}
+
 .progress-container {
     width: 100%;        /* Full width of the player */
     height: 10px;   /* Height of the progress bar */    
