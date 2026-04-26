@@ -70,6 +70,8 @@ function loadTrack(index) {
         status.textContent = `Loaded: ${track.name}`;
 
         updateNowPlaying(track);
+
+        highlightActive();
     }
 }
 
@@ -120,10 +122,18 @@ function updateNowPlaying(track) {
 
 
 function highlightActive() {
+
     const items = document.querySelectorAll("#playlist li");
 
-    items.forEach((item, i) => {
-        item.classList.toggle("active-track", i === currentTrackIndex);
+    items.forEach((item, index) => {
+
+        const isActive = index === currentTrackIndex;
+
+        item.classList.toggle("active-track", isActive);
+
+        if (isActive) {
+            item.scrollIntoView({ block: "nearest", behavior: "smooth"});
+        }
     });
 
 }
@@ -220,6 +230,8 @@ muteBtn.addEventListener("click", function() {
 
         loadTrack(currentTrackIndex);
         audio.play();
+
+        highlightActive();
         
     });
 
@@ -241,6 +253,8 @@ muteBtn.addEventListener("click", function() {
 
         loadTrack(currentTrackIndex);
         audio.play()
+
+        highlightActive();
 
     });
 
