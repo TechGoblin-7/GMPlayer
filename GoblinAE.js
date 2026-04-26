@@ -16,6 +16,8 @@ const volume = document.getElementById("volume");
 const muteBtn = document.getElementById('mute');
 const timeDisplay = document.getElementById("timeDisplay");
 let repeatMode = "off"; //value: "off", "all", "one"
+let shuffleMode = false;
+
 
 
 // Load audio files
@@ -240,17 +242,17 @@ muteBtn.addEventListener("click", function() {
 
     nextBtn.addEventListener("click", function() {
 
-        console.log("Next clicked");
-        console.log("Before:", currentTrackIndex, playlist.length);
+        if (shuffleMode) {
+            currentTrackIndex = getRandomTrackIndex();
+        } else {
 
-        currentTrackIndex++;
+            currentTrackIndex++;
 
-        //loop back to start if at end
-        if (currentTrackIndex >= playlist.length) {
-            currentTrackIndex = 0;
+            //loop back to start if at end
+            if (currentTrackIndex >= playlist.length) {
+                currentTrackIndex = 0;
+            }
         }
-
-        console.log("After:", currentTrackIndex)
 
         loadTrack(currentTrackIndex);
         audio.play()
@@ -260,7 +262,7 @@ muteBtn.addEventListener("click", function() {
     });
 
     const repeatBtn = document.getElementById("repeat");
-
+//loop settings
     repeatBtn.addEventListener("click", function () {
 
         if (repeatMode === "off") {
@@ -279,28 +281,62 @@ muteBtn.addEventListener("click", function() {
     });
 
     audio.addEventListener("ended", function() {
-            if (repeatMode === "all") {
-             currentTrackIndex++;
-             
-             if (currentTrackIndex >= playlist.length) {
-                currentTrackIndex = 0;
-             }
 
-             loadTrack(currentTrackIndex);
-             audio.play();
-             return;
-            }
         if (repeatMode === "one") {
             audio.currentTime = 0;
             audio.play();
             return;
         }
-        
-        if (repeatMode === "off") {
+
+        if (shuffleMode) {
+            currentTrackIndex = getRandomTrackIndex();
+        }
+
+        else if (repeatMode === "all") {
+             currentTrackIndex++;
+             
+             if (currentTrackIndex >= playlist.length) {
+                currentTrackIndex = 0;
+             }
+        }
+
+        else {
+            
             playPause.textContent = "Play";
             status.textContent = "Finished";
+            return;
+        }
+
+        loadTrack(currentTrackIndex);
+             audio.play();
+    });
+
+    //shuffle settings
+    const shuffleBtn = document.getElementById("shuffle");
+
+    shuffleBtn.addEventListener("click", function () {
+
+        shuffleMode = !shuffleMode;
+
+        if (shuffleMode) {
+            shuffleBtn.textContent = "🔀 On";
+        } else {
+            shuffleBtn.textContent = "🔀 Off";
         }
     });
+
+    function getRandomTrackIndex() {
+
+        if (playlist.length <= 1) return 0;
+
+        let newIndex;
+
+        do {
+            newIndex = Math.floor(Math.random() * playlist.length);
+        } while (newIndex === currentTrackIndex);
+
+        return newIndex;
+    };
 
     progressContainer.addEventListener("click", function(e) {
         // Total width of the progress container
