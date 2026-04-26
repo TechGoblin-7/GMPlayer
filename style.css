@@ -3,7 +3,7 @@ html {
 }
 
 body {
- font-family:  verdana, Geneva, sans-serif;
+ font-family:  'UnifrakturCook', cursive;
  background: #29183a;
  color:#57c855;
  display: flex;
@@ -105,6 +105,15 @@ input[type="range"] {
     border-radius: 15px;     /* Rounded corners */
 
     transition: width 0.1s linear; /* Smooth transition for width changes */
+}
+
+#timeDisplay {
+    font-family: 'UnifrakturCook', cursive;
+    font-size: 15px;
+    color: #57c855;
+    text-align: center;
+    margin: 5px 0;
+    letter-spacing: 1px;
 }
 
 .playlist {
