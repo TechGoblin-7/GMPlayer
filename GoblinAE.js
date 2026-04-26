@@ -15,6 +15,7 @@ const nowPlaying = document.getElementById("nowPlaying");
 const volume = document.getElementById("volume");
 const muteBtn = document.getElementById('mute');
 const timeDisplay = document.getElementById("timeDisplay");
+let repeatMode = "off"; //value: "off", "all", "one"
 
 
 // Load audio files
@@ -258,9 +259,48 @@ muteBtn.addEventListener("click", function() {
 
     });
 
-     audio.addEventListener("ended", function() {
-            nextBtn.click();
-        });
+    const repeatBtn = document.getElementById("repeat");
+
+    repeatBtn.addEventListener("click", function () {
+
+        if (repeatMode === "off") {
+            repeatMode = "all";
+            repeatBtn.textContent = "🔁 All"
+        }
+        else if (repeatMode === "all") {
+            repeatMode = "one";
+            repeatBtn.textContent = "🔁 One"
+        }
+
+        else {
+            repeatMode = "off";
+            repeatBtn.textContent = "🔁 Off"
+        }
+    });
+
+    audio.addEventListener("ended", function() {
+            if (repeatMode === "all") {
+             currentTrackIndex++;
+             
+             if (currentTrackIndex >= playlist.length) {
+                currentTrackIndex = 0;
+             }
+
+             loadTrack(currentTrackIndex);
+             audio.play();
+             return;
+            }
+        if (repeatMode === "one") {
+            audio.currentTime = 0;
+            audio.play();
+            return;
+        }
+        
+        if (repeatMode === "off") {
+            playPause.textContent = "Play";
+            status.textContent = "Finished";
+        }
+    });
 
     progressContainer.addEventListener("click", function(e) {
         // Total width of the progress container

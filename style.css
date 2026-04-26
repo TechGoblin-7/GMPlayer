@@ -51,16 +51,17 @@ input[type="range"] {
 #playPause {
     background: #61c034;
     color: #6a55c8;
+    padding: 5px;
 }
 
 #playPause:hover {
-    background: #a30498ac;
+    background: #b3059eac;
     color: rgb(210, 213, 118);
 }
 
 #stop {
-    background: #630305;
-    color: white;
+    background: #bd789f;
+    color: rgba(177, 11, 11, 0.817);
 }
 
 #stop:hover {
