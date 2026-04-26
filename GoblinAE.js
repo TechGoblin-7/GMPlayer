@@ -14,6 +14,8 @@ const progress = document.getElementById('progress');
 const nowPlaying = document.getElementById("nowPlaying");
 const volume = document.getElementById("volume");
 const muteBtn = document.getElementById('mute');
+const timeDisplay = document.getElementById("timeDisplay");
+
 
 // Load audio files
 fileInput.addEventListener("change", function() {
@@ -84,6 +86,28 @@ function playTrack(index) {
 
     highlightActive();
 }
+
+function formatTime(seconds) {
+    if (isNaN(seconds)) return "0:00";
+
+    const mins = Math.floor(seconds / 60);
+    const secs = Math.floor(seconds % 60);
+
+    return `${mins}:${secs < 10 ? "0" : ""}${secs}`;
+}
+
+audio.addEventListener("timeupdate", function () {
+
+    if (audio.duration) {
+
+        const progressPercent = (audio.currentTime / audio.duration) * 100;
+        progress.style.width = `${progressPercent}%`;
+
+        //Time Display Update
+        timeDisplay.textContent = 
+            `${formatTime(audio.currentTime)} / ${formatTime(audio.duration)}`;
+    }
+});
 
 function updateNowPlaying(track) {
 
