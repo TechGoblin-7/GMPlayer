@@ -28,9 +28,9 @@ fileInput.addEventListener("change", function() {
         });
 
         //Set current track to the newest entry
-        currentTrack = playlist.length -1;
+        currentTrackIndex = playlist.length -1;
 
-        loadTrack(currentTrack);
+        loadTrack(currentTrackIndex);
     });
     
     renderPlaylist();
@@ -108,7 +108,13 @@ function highlightActive() {
 
 volume.addEventListener("input", function () {
     audio.volume = this.value / 100;
-})
+
+    //unmute when slider is Ajusted
+    if (audio.muted && audio.volume > 0) {
+        audio.muted = false;
+        muteBtn.textContent = "🔊";
+    }
+});
 
 //playPause button functionality
 playPause.addEventListener("click", function() {
