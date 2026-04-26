@@ -13,7 +13,7 @@ const progressContainer = document.getElementById('progressContainer');
 const progress = document.getElementById('progress');
 const nowPlaying = document.getElementById("nowPlaying");
 const volume = document.getElementById("volume");
-
+const muteBtn = document.getElementById('mute');
 
 // Load audio files
 fileInput.addEventListener("change", function() {
@@ -122,6 +122,21 @@ playPause.addEventListener("click", function() {
             playPause.textContent = "Play";
             status.textContent = "Paused";
         }
+    }
+});
+
+//mute button functions
+
+muteBtn.addEventListener("click", function() {
+
+    //Toggle mute active state
+    audio.muted = !audio.muted;
+
+    //update icon
+    if (audio.muted) {
+        muteBtn.textContent = '🔇';
+    } else {
+        muteBtn.textContent = '🔊';
     }
 });
     
