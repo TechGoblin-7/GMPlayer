@@ -11,6 +11,8 @@ const status = document.getElementById('status');
 const progressContainer = document.getElementById('progressContainer');
 //the inner fill that fills/grows as the song progresses
 const progress = document.getElementById('progress');
+const nowPlaying = document.getElementById("nowPlaying");
+
 
 
 // Load audio files
@@ -33,6 +35,9 @@ fileInput.addEventListener("change", function() {
     
     renderPlaylist();
     status.textContent = `${playlist.length} song(s) loaded`;
+
+    updateNowPlaying(playlist[currentTrackIndex]);
+    
 });
 
 
@@ -61,6 +66,8 @@ function loadTrack(index) {
         audio.src = track.url;
 
         status.textContent = `Loaded: ${track.name}`;
+
+        updateNowPlaying(track);
     }
 }
 
@@ -73,8 +80,20 @@ function playTrack(index) {
     currentTrackIndex = index;
     status.textContent = `Playing: ${track.name}`;
 
+    updateNowPlaying(track);
+
     highlightActive();
 }
+
+function updateNowPlaying(track) {
+
+    if(track) {
+        nowPlaying.textContent = `Now Playing: ${track.name}`;
+    } else {
+        nowPlaying.textContent = "No Song Playing";
+    }
+}
+
 
 function highlightActive() {
     const items = document.querySelectorAll("#playlist li");

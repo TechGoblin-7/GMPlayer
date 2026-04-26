@@ -10,13 +10,20 @@ body {
 
 }
 
+.app {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
 .player {
     background: #0a495d;
-    padding: 20px;
+    padding: 35px;
     border-radius: 7px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     width: 650px;
-    height: auto;
+    margin: 30px;
     text-align: center;
 }
 
@@ -78,7 +85,7 @@ button:hover {
     height: 10px;   /* Height of the progress bar */    
     background: #7d98a9;        /* Background color of the progress bar container */
     border-radius: 5px;     /* Rounded corners */
-    margin: 15px auto;   /* Center the progress bar and add some margin */
+    margin: 25px auto;   /* Center the progress bar and add some margin */
     cursor: pointer;   /* Change cursor to pointer on hover */
 }
 
@@ -92,14 +99,13 @@ button:hover {
 }
 
 .playlist {
-    margin-top: 20px;
-    width: 300px;
-    text-align: left;
+    margin-top: 35px;
+    text-align: center;
 }
 
 .playlist ul {
     list-style: none;
-    padding: 2px;
+    padding: 4px;
 
 }
 
@@ -114,12 +120,19 @@ button:hover {
 }
 
 .active-track {
-    background-color: #ccc;
+    background-color: #db5d5d;
 
 }
 
+#nowPlaying {
+    text-align: center;
+    font-size: 16px;
+    margin: 10px 0;
+    opacity: 0.9;
+}
+
 .repo-footer {
-    margin-top: 45px;
+    margin-top: 65px;
     font-size: 10px;
     opacity: 0.8;
     text-align: center;

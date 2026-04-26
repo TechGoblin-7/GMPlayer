@@ -12,44 +12,52 @@
 
    
         <div class="player">
+            <h1>&#119137; &ensp;  Goblin Music Player  &#x1f47a;</h1>
 
-        <h1>&#119137; &ensp;  Goblin Music Player  &#x1f47a;</h1>
-        <input type="file" id="fileInput" accept="audio/*" multiple>
+            <h2 id="nowPlaying">No Song Playing</h2>
 
-        <audio id="audio"></audio>
+            <!-- Progress Bar  Container (clickable area)-->
+            <div class="progress-container" id="progressContainer">
+                <div class="progress" id="progress"></div>
+            </div>
 
-        <div class="controls">
-            <button id="prev">&#8617;</button>
-            <button id="playPause">Play/Pause</button>
-            <button id="stop">Stop</button>
-            <button id="next">&#8618;</button>
+            <audio id="audio"></audio>
+
+            <div class="controls">
+                <button id="prev">&#8617;</button>
+                <button id="playPause">Play/Pause</button>
+                <button id="stop">Stop</button>
+                <button id="next">&#8618;</button>
+            </div>
+
+            
+            <input type="file" id="fileInput" accept="audio/*" multiple>
+            
+            <div class="playlist">
+
+                <h3>Playlist</h3>
+                <ul id="playlist"></ul>
+            </div>
+
+            <p id="status">No song loaded</p>
+
         </div>
 
-        <!-- Progress Bar  Container (clickable area)-->
-         <div class="progress-container" id="progressContainer">
-            <div class="progress" id="progress"></div>
+    
 
-        </div>
+        <footer class="GMPlayer-footer">
 
-        <p id="status">No song loaded</p>
-        </div> 
-    </div>
+            <p>
+                Goblin Music Player v0.1 *
+                <a href="https://github.com/TechGoblin-7/GMPlayer" target="_blank">GitHub Repository
+                </a>
+            </p>
 
-    <div class="playlist">
-        <h3>Playlist</h3>
-        <ul id="playlist"></ul>
-    </div>
+        </footer>
 
-    <footer class="GMPlayer-footer">
-        <p>Goblin Music Player v0.1 * 
-        <a href="https://github.com/TechGoblin-7/GMPlayer" target="_blank">GitHub Repository</a>
-    </p>
-
-    <div>
         <img class="logo" src="assets/Digital Jolly Roger.png" alt="logo">
-    </div>
 
-    </footer>
+    </div>
     
 
     <script src="GoblinAE.js"></script>
