@@ -1,6 +1,6 @@
 body {
  font-family:  verdana, Geneva, sans-serif;
- background: #1a2773;
+ background: #29183a;
  color:#57c855;
  display: flex;
     justify-content: center;
@@ -18,8 +18,8 @@ body {
 }
 
 .player {
-    background: #0a495d;
-    padding: 35px;
+    background: #5629b5;
+    padding: 20px;
     border-radius: 7px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     width: 650px;
@@ -87,7 +87,7 @@ input[type="range"] {
 .progress-container {
     width: 100%;        /* Full width of the player */
     height: 10px;   /* Height of the progress bar */    
-    background: #7d98a9;        /* Background color of the progress bar container */
+    background: #7634b0;        /* Background color of the progress bar container */
     border-radius: 5px;     /* Rounded corners */
     margin: 25px auto;   /* Center the progress bar and add some margin */
     cursor: pointer;   /* Change cursor to pointer on hover */
@@ -103,7 +103,14 @@ input[type="range"] {
 }
 
 .playlist {
-    margin-top: 35px;
+    background: #508b34;
+    color:#5629b5;
+    margin: 35px;
+    padding: 15px;
+    text-align: center;
+    border-radius: 7px;
+    box-shadow: 0 0 10px rgba(27, 23, 23, 0.1);
+    width: 650px;
     text-align: center;
 }
 
