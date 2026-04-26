@@ -12,7 +12,7 @@ const progressContainer = document.getElementById('progressContainer');
 //the inner fill that fills/grows as the song progresses
 const progress = document.getElementById('progress');
 const nowPlaying = document.getElementById("nowPlaying");
-
+const volume = document.getElementById("volume");
 
 
 // Load audio files
@@ -103,6 +103,12 @@ function highlightActive() {
     });
 
 }
+
+//volume function
+
+volume.addEventListener("input", function () {
+    audio.volume = this.value / 100;
+})
 
 //playPause button functionality
 playPause.addEventListener("click", function() {
