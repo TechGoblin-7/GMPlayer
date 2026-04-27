@@ -22,6 +22,7 @@ const sleepStatus = document.getElementById("sleepStatus");
 
 let sleepTimer = null;
 let sleepTimeRemaining = 0;
+let sleepActive = false;
 
 
 
@@ -287,6 +288,11 @@ muteBtn.addEventListener("click", function() {
 
     audio.addEventListener("ended", function() {
 
+        if (sleepActive) {
+            sleepActive = false;
+            return;
+        }
+
         if (repeatMode === "one") {
             audio.currentTime = 0;
             audio.play();
@@ -382,12 +388,20 @@ muteBtn.addEventListener("click", function() {
             const secs = sleepTimeRemaining % 60;
 
             sleepStatus.textContent =
-            `Sleep in ${mins}:${secs < 10 ? "0" : ""}${secs}`;
+               `Sleep in ${mins}:${secs < 10 ? "0" : ""}${secs}`;
 
             if (sleepTimeRemaining <= 0) {
                 clearInterval(sleepTimer);
 
-                sleepStatus.textContent = "😴 Playback Stopped";
+                sleepActive = true;
+
+                audio.pause();
+                audio.currentTime = 0;
+
+                playPause.textContent = "Play";
+                status.textContent = "Sleep Timer Activated"
+
+                sleepStatus.textContent = "😴 Playback StzzzZZZZzzz...";
             }
         }, 1000);
     });
