@@ -17,6 +17,11 @@ const muteBtn = document.getElementById('mute');
 const timeDisplay = document.getElementById("timeDisplay");
 let repeatMode = "off"; //value: "off", "all", "one"
 let shuffleMode = false;
+const sleepSelect = document.getElementById("sleepSelect");
+const sleepStatus = document.getElementById("sleepStatus");
+
+let sleepTimer = null;
+let sleepTimeRemaining = 0;
 
 
 
@@ -350,3 +355,39 @@ muteBtn.addEventListener("click", function() {
     });
 
     //This event listener allows the user to click on the progress bar to seek to a different part of the audio. It calculates where the user clicked relative to the width of the progress container and sets the currentTime of the audio accordingly, allowing for interactive seeking through the track.
+
+    sleepSelect.addEventListener("change", function () {
+
+        //clear any existing timer
+        if (sleepTimer) {
+            clearInterval(sleepTimer);
+        }
+
+        const minutes = parseInt(this.value);
+
+        if (minutes === 0) {
+            sleepStatus.textContent = "";
+            return;
+        }
+
+        sleepTimeRemaining = minutes * 60;
+
+        sleepStatus.textContent = `Sleep in ${minutes}:00`;
+
+        sleepTimer = setInterval(() => {
+
+            sleepTimeRemaining--;
+
+            const mins = Math.floor(sleepTimeRemaining / 60);
+            const secs = sleepTimeRemaining % 60;
+
+            sleepStatus.textContent =
+            `Sleep in ${mins}:${secs < 10 ? "0" : ""}${secs}`;
+
+            if (sleepTimeRemaining <= 0) {
+                clearInterval(sleepTimer);
+
+                sleepStatus.textContent = "😴 Playback Stopped";
+            }
+        }, 1000);
+    });

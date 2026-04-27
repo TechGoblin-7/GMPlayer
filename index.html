@@ -43,9 +43,22 @@
                 <button id="next">&#8618;</button>
                 <button id="repeat">🔁 Off</button>
             </div>
-        </div>
 
-            
+            <div class="sleep-timer">
+                <select id="sleepSelect">
+                    <option value="0">Sleep Timer Off</option>
+                    <option value="3">3 min</option>
+                    <option value="5">5 min</option>
+                    <option value="7">7 min</option>
+                    <option value="10">10 min</option>
+                    <option value="15">15 min</option>
+                    <option value="30">30 min</option>
+                </select>
+
+                <span id="sleepStatus"></span>
+            </div>
+        </div>
+        
             <input type="file" id="fileInput" accept="audio/*" multiple>
             
         <div class="playlist">

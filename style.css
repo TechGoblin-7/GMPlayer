@@ -218,3 +218,14 @@ input[type="range"] {
     background: #9bdc67;
     color: #9348a6;
 }
+
+.sleep-timer {
+    margin-top: 10px;
+    text-align: center;
+}
+
+#sleepStatus {
+    margin-left: 10px;
+    font-size: 25px;
+    opacity: 0.6;
+}

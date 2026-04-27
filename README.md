@@ -1,94 +1,127 @@
-# 🎧 GMPlayer (Web Music Player)
+# 🎧 Goblin Music Player (GMPlayer) v1.0
 
-A browser-based music player built with HTML, CSS, and JavaScript that allows users to load and play local audio files with playlist support.
+A browser-based music player built from scratch using HTML, CSS, and JavaScript.
+
+This project started as a learning exercise and has evolved into a fully functional media player with playlist management, playback controls, and advanced features like shuffle, repeat modes, and a sleep timer.
 
 ---
 
 ## 🚀 Features
 
-### 🎵 Audio Playback
-- Load and play local audio files
-- Play / Pause toggle
-- Stop and reset playback
+### 🎵 Core Playback
 
-### 📂 Playlist System (NEW)
-- Load multiple audio files at once
-- Automatically generate a playlist
-- Click any track to play it
-- Active track highlighting
+* Play / Pause / Stop
+* Next / Previous track navigation
+* Auto-play next track
 
-### 📊 Status Feedback
-- Displays current state (Playing, Paused, Stopped)
-- Shows loaded track names
+### 📂 File Handling
+
+* Load local audio files
+* Multi-file playlist support
+* Click-to-play playlist interaction
+
+### 📊 Playback UI
+
+* Live progress bar with seek support
+* Real-time time display (current / total)
+* “Now Playing” track display
+* Active track highlighting
+
+### 🔊 Audio Controls
+
+* Volume slider
+* Mute toggle with UI sync
+
+### 🔁 Playback Modes
+
+* Repeat Off
+* Repeat All (loop playlist)
+* Repeat One (loop track)
+
+### 🔀 Shuffle Mode
+
+* Random track selection
+* Prevents immediate repeats
+
+### ⏱️ Sleep Timer
+
+* Countdown-based auto stop
+* Live timer display
+* Clean timer reset handling
 
 ---
 
-## 🧠 Technologies Used
+## 🧠 What This Project Demonstrates
 
-- HTML5
-- CSS3
-- JavaScript (Vanilla)
-- HTML Audio API (`<audio>` element)
+This project focuses on building a **state-driven UI system** using vanilla JavaScript.
 
----
+Concepts implemented:
 
-## 📁 Project Structure
-GMPlayer/
-│
-├── index.html
-├── style.css
-├── GoblinAE.js
-├── assets/
-│ └── Digital Jolly Roger.png
-└── README.md
-
+* DOM manipulation
+* Event-driven programming
+* State management (playlist, playback, modes)
+* Audio API usage
+* Timers (`setInterval`)
+* UI synchronization across multiple inputs
 
 ---
 
-## ▶️ How to Run
+## 🏗️ Project Structure
 
-1. Clone the repository:
 ```bash
-git clone https://github.com/your-username/GMPlayer.git
+GMPlayer/
+│── index.html
+│── style.css
+│── GoblinAE.js
+│── assets/
+```
 
-cd GMPlayer
+---
 
-Open index.html in your browser
-OR use VS Code Live Server
+## 🎯 Current Version
 
-🎮 How to Use
-Click Choose Files
-Select one or more audio files
-Songs will appear in the playlist
-Click a track to play it
-Use Play/Pause or Stop controls
-🛣️ Roadmap
-🔜 Next Features
-Auto-play next track
-Progress bar (seek functionality)
-Volume control
-Next / Previous buttons
-Drag & drop file support
-🎨 Future Improvements
-UI redesign (modern player layout)
-Animations and transitions
-Mobile responsiveness
-🧪 Learning Focus
+**v1.0 – Feature Complete Core Player**
 
-This project is part of a self-guided learning path focused on:
+The application now includes all standard music player functionality and serves as a strong foundation for advanced features.
 
-JavaScript event handling
-DOM manipulation
-Managing application state
-Building interactive UI systems
-Git & GitHub workflow
-📌 Current Status
+---
 
-Version: v0.2
+## 🔮 Planned Features
 
-The player now supports multiple tracks and basic playlist interaction.
-Future updates will focus on improving usability and adding advanced playback features.
+* 🎧 Audio Visualizer (Web Audio API)
+* ⌨️ Keyboard Controls
+* 💾 Persistent Settings (localStorage)
+* 🎨 UI Animations & Polish
+* 📱 Responsive Design
 
-🙌 Author
+---
 
-Built by Jacob Arlo Needham as part of a hands-on journey into web development and software engineering.
+## 🛠️ How to Use
+
+1. Open the app in your browser
+2. Click “Choose Files” to load audio
+3. Select a track from the playlist
+4. Use controls to manage playback
+
+---
+
+## 💡 Development Notes
+
+This project was built incrementally with a focus on:
+
+* Understanding each feature deeply
+* Building without frameworks
+* Maintaining clean, readable logic
+
+---
+
+## 🔗 Repository
+
+GitHub: https://github.com/TechGoblin-7/GMPlayer
+
+---
+
+## 🧙 Author
+
+Built by TechGoblin(Jacob Arlo Needham)
+“Learning by building stuff you want to use, having some fun as you go, one system at a time. Everytime.”
