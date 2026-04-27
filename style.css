@@ -35,8 +35,10 @@ button {
     margin: 7px;
     padding: 5px;
     border: solid;
-    border-radius: 15px;
-    cursor: pointer
+    border-radius: 25px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: all 0.2s ease;
 }
 
 button:hover {
@@ -205,4 +207,14 @@ input[type="range"] {
     align-items: center;
     justify-content: center;
     gap: 15px;
+}
+
+#shuffle, #repeat {
+    background: #9348a6;
+    color: #9bdc67;
+}
+
+#shuffle:hover, #repeat:hover {
+    background: #9bdc67;
+    color: #9348a6;
 }
