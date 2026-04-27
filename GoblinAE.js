@@ -405,3 +405,13 @@ muteBtn.addEventListener("click", function() {
             }
         }, 1000);
     });
+
+    //sw.js
+    self.addEventListener("install", () => {
+        console.log("service Worker Installed");
+    
+    });
+
+    if ("ServiceWorker" in navigation) {
+        navigation.ServiceWorker.register("sw.js");
+    }
