@@ -413,5 +413,9 @@ muteBtn.addEventListener("click", function() {
     });
 
     if ("ServiceWorker" in navigation) {
-        navigation.ServiceWorker.register("sw.js");
+        window.addEventListener("load", () =>{
+            navigation.ServiceWorker.register("sw.js")
+            .then(() => console.log("SW registered"))
+            .catch(err => console.log("SW error", err));
+    });
     }
