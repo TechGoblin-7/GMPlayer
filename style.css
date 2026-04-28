@@ -37,6 +37,19 @@ body {
     text-align: center;
 }
 
+.controls {
+    display: flex;
+    flex-direction: column;
+    gap:10px;
+}
+
+.control-group {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 25px;
+}
+
 button {
     margin: 7px;
     padding: 5px;
@@ -61,10 +74,33 @@ input[type="range"] {
     accent-color: rgb(78, 120, 13);
 }
 
+.main button {
+    font-size: 18px;
+    padding: 10px 14px;
+}
+
+.secondary button {
+    opacity:0.7;
+    font-size: 14px;
+    padding: 6px 10px;
+    border: 2px solid #9348a6;
+}
+
+.secondary button.active {
+    background: #9bdc67;
+    color: #9348a6
+}
+
+.volume input[type="range"] {
+    width:120px;
+}
+
 #playPause {
     background: #61c034;
     color: #6a55c8;
-    padding: 5px;
+    padding: 12px 18px;
+    border-radius: 50%;
+    font-size: 20px;
 }
 
 #playPause:hover {

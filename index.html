@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
+
     <meta name="theme-color" content="57c855">
 
 
@@ -39,17 +39,32 @@
 
             <audio id="audio"></audio>
 
-            <input type="range" id="volume" min="0" max="100" vaule="100">
-
-            <button id="mute">&#128266;</button>
 
             <div class="controls">
-                <button id="shuffle">🔀 Off</button>
-                <button id="prev">&#8617;</button>
-                <button id="playPause">&#x23EF;</button>
-                <button id="stop">&#9209;</button>
-                <button id="next">&#8618;</button>
-                <button id="repeat">🔁 Off</button>
+
+                <!--volume actions-->
+                <div class="control-group volume">
+                    <button id="mute">&#128266;</button>
+                    <input type="range" id="volume" min="0" max="100" vaule="100">
+
+                </div>
+
+                <!--main actions-->
+                <div class="control-group main">
+                    <button id="prev">&#8617;</button>
+                    <button id="playPause">&#x23EF;</button>
+                    <button id="stop">&#9209;</button>
+                    <button id="next">&#8618;</button>
+                </div>
+
+                <!-- Secondary Controls-->
+                <div class="control-group secondary">
+                    <button id="repeat">🔁 Off</button>
+                    <button id="shuffle">🔀 Off</button>
+                </div>
+
+
+               
             </div>
 
             <div class="sleep-timer">
