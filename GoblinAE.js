@@ -15,7 +15,7 @@ const nowPlaying = document.getElementById("nowPlaying");
 const volume = document.getElementById("volume");
 const muteBtn = document.getElementById('mute');
 const timeDisplay = document.getElementById("timeDisplay");
-let repeatMode = "off"; //value: "off", "all", "one"
+let repeatMode = "all"; //value: "off", "all", "one"
 let shuffleMode = false;
 const sleepSelect = document.getElementById("sleepSelect");
 const sleepStatus = document.getElementById("sleepStatus");
@@ -43,10 +43,13 @@ fileInput.addEventListener("change", function() {
             url: url
         });
 
-        //Set current track to the newest entry
-        currentTrackIndex = playlist.length -1;
+        //Set current track 
+        if (playlist.length === files.length) {
+            currentTrackIndex = 0;
+            loadTrack(currentTrackIndex);
+        }
 
-        loadTrack(currentTrackIndex);
+        
     });
 
 
@@ -215,11 +218,11 @@ muteBtn.addEventListener("click", function() {
 
 //stop button functionality
 
-    stop.addEventListener("click", function() {
+stop.addEventListener("click", function() {
     audio.pause();
     audio.currentTime = 0;
     status.textContent = "Stopped";
-    });
+});
     // The stop button pauses the audio and resets the current time to 0, effectively stopping the playback and allowing it to be played again from the beginning. It also updates the status to "Stopped".
 
     //This event listener updates the progress bar as the audio plays
