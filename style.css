@@ -3,14 +3,17 @@ html {
 }
 
 body {
- font-family:  'UnifrakturCook', cursive;
- background: #29183a;
- color:#57c855;
- display: flex;
+    font-family:  'UnifrakturCook', cursive;
+    background: #29183a;
+    color:#57c855;
+    display: flex;
     justify-content: center;
     align-items: center;
     height:auto;
     flex-direction: column;
+    -webkit-user-select: none;
+    user-select: none;
+
 
 }
 
@@ -20,6 +23,9 @@ body {
     align-items: center;
     width: 100%;
 }
+
+
+    
 
 .player {
     background: #5629b5;
@@ -38,7 +44,12 @@ button {
     border-radius: 25px;
     cursor: pointer;
     font-weight: bold;
-    transition: all 0.2s ease;
+    transition: transform 0.1s ease;
+    touch-action: manipulation;
+}
+
+button:active {
+    transform: scale(0.95);
 }
 
 button:hover {
@@ -228,4 +239,20 @@ input[type="range"] {
     margin-left: 10px;
     font-size: 25px;
     opacity: 0.6;
+}
+
+
+@media (max-width: 768px) {
+    .player {
+        width: 95%;
+        margin: 10px;
+    }
+
+    .playlist {
+        width: 95%;
+    }
+
+    button {
+        padding:10px;
+    }
 }
