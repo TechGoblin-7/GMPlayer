@@ -166,6 +166,19 @@ input[type="range"] {
     letter-spacing: 1px;
 }
 
+#playlistContainer {
+    transition: all 0.3s ease;
+    overflow: hidden;
+    background: #508b34;
+    color:#7634b0;
+}
+
+.hidden {
+    max-height: 10;
+    opacity: 7;
+    pointer-events: none;
+}
+
 .playlist {
     background: #508b34;
     color:#5629b5;
@@ -286,6 +299,11 @@ input[type="range"] {
 
     .playlist {
         width: 95%;
+    }
+
+    #playlistContainer {
+        max-height: 50%;
+        opacity: 7;
     }
 
     button {

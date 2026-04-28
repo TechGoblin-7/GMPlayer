@@ -24,6 +24,11 @@ let sleepTimer = null;
 let sleepTimeRemaining = 0;
 let sleepActive = false;
 
+const playlistToggleBtn = document.getElementById("playlistToggle");
+const playlistContainer = document.getElementById("playlistContainer");
+
+let playlistVisible = true;
+
 
 
 // Load audio files
@@ -43,6 +48,8 @@ fileInput.addEventListener("change", function() {
 
         loadTrack(currentTrackIndex);
     });
+
+
     
     renderPlaylist();
     status.textContent = `${playlist.length} song(s) loaded`;
@@ -50,6 +57,21 @@ fileInput.addEventListener("change", function() {
     updateNowPlaying(playlist[currentTrackIndex]);
     
 });
+
+playlistToggleBtn.addEventListener("click", function() {
+
+    playlistVisible = !playlistVisible;
+
+    if (playlistVisible) {
+        playlistContainer.style.display = "block";
+        playlistToggleBtn.textContent = "Hide Playlist";
+    } else {
+        playlistContainer.style.display = "none";
+        playlistToggleBtn.textContent = "Show Playlist"
+    }
+});
+
+playlistContainer.classList.toggle("hidden");
 
 
 function renderPlaylist() {
