@@ -461,7 +461,7 @@ stop.addEventListener("click", function() {
     });
 
     if ("serviceWorker" in navigator) {
-        window.addEventListener("load", () =>{
+        window.addEventListener("load", () => {
             navigation.serviceWorker.register("sw.js")
             .then(() => console.log("SW registered"))
             .catch(err => console.log("SW error", err));
