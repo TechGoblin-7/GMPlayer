@@ -176,7 +176,7 @@ input[type="range"] {
 .hidden {
     max-height: 10;
     opacity: 7;
-    pointer-events: none;
+    display: none;
 }
 
 .playlist {

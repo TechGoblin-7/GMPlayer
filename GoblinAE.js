@@ -1,34 +1,113 @@
+//State
 const playlist = [];
 let currentTrackIndex = 0;
-const fileInput = document.getElementById('fileInput');
-const audio = document.getElementById('audio')
-const playPause = document.getElementById('playPause');
-const stop = document.getElementById('stop');
-const prevBtn = document.getElementById('prev');
-const nextBtn = document.getElementById('next');
-const status = document.getElementById('status');
-//The Clickable area for the progress bar
-const progressContainer = document.getElementById('progressContainer');
-//the inner fill that fills/grows as the song progresses
-const progress = document.getElementById('progress');
-const nowPlaying = document.getElementById("nowPlaying");
-const volume = document.getElementById("volume");
-const muteBtn = document.getElementById('mute');
-const timeDisplay = document.getElementById("timeDisplay");
+
 let repeatMode = "all"; //value: "off", "all", "one"
 let shuffleMode = false;
-const sleepSelect = document.getElementById("sleepSelect");
-const sleepStatus = document.getElementById("sleepStatus");
 
 let sleepTimer = null;
 let sleepTimeRemaining = 0;
 let sleepActive = false;
 
+let playlistVisible = true;
+
+//DOM Elements
+const audio = document.getElementById('audio')
+const fileInput = document.getElementById('fileInput');
+
+const playPause = document.getElementById('playPause');
+const stop = document.getElementById('stop');
+const prevBtn = document.getElementById('prev');
+const nextBtn = document.getElementById('next');
+
+const status = document.getElementById('status');
+//The Clickable area for the progress bar
+const nowPlaying = document.getElementById("nowPlaying");
+const timeDisplay = document.getElementById("timeDisplay");
+
+const progressContainer = document.getElementById('progressContainer');
+//the inner fill that fills/grows as the song progresses
+const progress = document.getElementById('progress');
+
+const volume = document.getElementById("volume");
+const muteBtn = document.getElementById('mute');
+
 const playlistToggleBtn = document.getElementById("playlistToggle");
 const playlistContainer = document.getElementById("playlistContainer");
 
-let playlistVisible = true;
+const sleepSelect = document.getElementById("sleepSelect");
+const sleepStatus = document.getElementById("sleepStatus");
 
+
+
+//INIT(startup Logic)
+function init() {
+    loadPlaylistVisibility();
+    updatePlaylistUI();
+}
+
+init();
+
+function loadPlaylistVisibility() {
+    //local storage save state 
+    const saveState = localStorage.getItem("playlistVisible");
+
+    if (saveState !== null) {
+    playlistVisible = saveState === "true";
+    }
+
+}
+
+//UI Helper
+function updatePlaylistUI() {
+
+    playlistContainer.classList.toggle("hidden", !playlistVisible);
+
+    playlistToggleBtn.textContent = playlistVisible
+        ?"Hide Playlist"
+        :"Show Playlist";
+}
+
+//CORE PLAYER FUNCTIONS
+
+function loadTrack(index) {
+
+    const track = playlist[index];
+
+    if(track) {
+        audio.src = track.url;
+        status.textContent = `Loaded: ${track.name}`;
+        updateNowPlaying(track);
+        highlightActive();
+    }
+}
+
+function playTrack(index) {
+    const track = playlist[index]
+
+    audio.src = track.url;
+    audio.play();
+
+    currentTrackIndex = index;
+    status.textContent = `Playing: ${track.name}`;
+
+    updateNowPlaying(track);
+
+    highlightActive();
+}
+
+audio.addEventListener("timeupdate", function () {
+
+    if (audio.duration) {
+
+        const progressPercent = (audio.currentTime / audio.duration) * 100;
+        progress.style.width = `${progressPercent}%`;
+
+        //Time Display Update
+        timeDisplay.textContent = 
+            `${formatTime(audio.currentTime)} / ${formatTime(audio.duration)}`;
+    }
+});
 
 
 // Load audio files
@@ -61,20 +140,21 @@ fileInput.addEventListener("change", function() {
     
 });
 
-playlistToggleBtn.addEventListener("click", function() {
+function savePlaylistVisibility() {
+    localStorage.setItem("playlistVisible", playlistVisible);
+}
 
+playlistToggleBtn.addEventListener("click", () => {
     playlistVisible = !playlistVisible;
 
-    if (playlistVisible) {
-        playlistContainer.style.display = "block";
-        playlistToggleBtn.textContent = "Hide Playlist";
-    } else {
-        playlistContainer.style.display = "none";
-        playlistToggleBtn.textContent = "Show Playlist"
-    }
+    savePlaylistVisibility();
+    updatePlaylistUI();
+
 });
 
-playlistContainer.classList.toggle("hidden");
+
+
+
 
 
 function renderPlaylist() {
@@ -94,34 +174,7 @@ function renderPlaylist() {
     });
 }
 
-function loadTrack(index) {
 
-    const track = playlist[index];
-
-    if(track) {
-        audio.src = track.url;
-
-        status.textContent = `Loaded: ${track.name}`;
-
-        updateNowPlaying(track);
-
-        highlightActive();
-    }
-}
-
-function playTrack(index) {
-    const track = playlist[index]
-
-    audio.src = track.url;
-    audio.play();
-
-    currentTrackIndex = index;
-    status.textContent = `Playing: ${track.name}`;
-
-    updateNowPlaying(track);
-
-    highlightActive();
-}
 
 function formatTime(seconds) {
     if (isNaN(seconds)) return "0:00";
@@ -132,18 +185,7 @@ function formatTime(seconds) {
     return `${mins}:${secs < 10 ? "0" : ""}${secs}`;
 }
 
-audio.addEventListener("timeupdate", function () {
 
-    if (audio.duration) {
-
-        const progressPercent = (audio.currentTime / audio.duration) * 100;
-        progress.style.width = `${progressPercent}%`;
-
-        //Time Display Update
-        timeDisplay.textContent = 
-            `${formatTime(audio.currentTime)} / ${formatTime(audio.duration)}`;
-    }
-});
 
 function updateNowPlaying(track) {
 
@@ -187,6 +229,7 @@ volume.addEventListener("input", function () {
 //playPause button functionality
 playPause.addEventListener("click", function() {
     if(audio.src) {
+
         if(audio.paused) {
             audio.play();
             playPause.textContent = "Pause";
@@ -225,26 +268,8 @@ stop.addEventListener("click", function() {
 });
     // The stop button pauses the audio and resets the current time to 0, effectively stopping the playback and allowing it to be played again from the beginning. It also updates the status to "Stopped".
 
-    //This event listener updates the progress bar as the audio plays
-    audio.addEventListener("timeupdate", function() {
-        //audio.duration is the total length of the audio in seconds, and audio.currentTime is the current playback position in seconds. By dividing currentTime by duration, we get a value between 0 and 1 that represents how much of the audio has been played. Multiplying by 100 converts this to a percentage, which we can use to set the width of the progress bar.
-        //audio.currentTime is the current playback position in seconds, and audio.duration is the total length of the audio in seconds. By dividing currentTime by duration, we get a value between 0 and 1 that represents how much of the audio has been played. Multiplying by 100 converts this to a percentage, which we can use to set the width of the progress bar.
-    
-        if(audio.duration) {
-            // Calculate the percentage of the audio that has been played
-            const progressPercent = (audio.currentTime / audio.duration) * 100;
+   
 
-            // Example:
-            //currentTime = 30 seconds, duration = 120 seconds
-            //progressPercent = (30 / 120) * 100 = 25%
-
-            //set the width of the progress bar to reflect the current playback position
-            progress.style.width = `${progressPercent}%`;
-
-            //Example:
-            // "25%" will set the width of the progress bar to 25% of its container, visually indicating that 25% of the audio has been played.
-        }
-    });
 
     //Previous Button Functions
 
@@ -293,7 +318,11 @@ stop.addEventListener("click", function() {
     });
 
     const repeatBtn = document.getElementById("repeat");
+
+
 //loop settings
+
+
     repeatBtn.addEventListener("click", function () {
 
         if (repeatMode === "off") {
@@ -431,13 +460,7 @@ stop.addEventListener("click", function() {
         }, 1000);
     });
 
-    //sw.js
-    self.addEventListener("install", () => {
-        console.log("service Worker Installed");
-    
-    });
-
-    if ("ServiceWorker" in navigation) {
+    if ("serviceWorker" in navigator) {
         window.addEventListener("load", () =>{
             navigation.ServiceWorker.register("sw.js")
             .then(() => console.log("SW registered"))
