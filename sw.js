@@ -4,7 +4,8 @@ const ASSETS = [
     "/",
     "/index.html",
     "/style.css",
-    "/GoblinAE.js"
+    "/GoblinAE.js",
+    "/manifest.js"
 ];
 
 
