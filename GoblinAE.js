@@ -163,12 +163,52 @@ fileInput.addEventListener("change", function() {
     });
 
 
+
+
     
     renderPlaylist();
     status.textContent = `${playlist.length} song(s) loaded`;
 
     updateNowPlaying(playlist[currentTrackIndex]);
     
+});
+
+let musicFolderHandle = null;
+
+async function pickFolder() {
+    musicFolderHandle = await window.showDirectoryPicker();
+
+    localStorage.setItem("musicFolder", "granted");
+
+    loadFolder();
+}
+
+async function loadFolder() {
+    playlist.length = 0;
+
+    for await (const entry of musicFolderHandle.values()) {
+        if (entry.kind === "file" && entry.name.endsWith(".mp3")) {
+
+            const file = await entry.getFile();
+            const url = URL.createObjectURL(file);
+
+            playlist.push({
+                name: file.name,
+                url: url
+            });
+        }
+    }
+
+    renderPlaylist();
+    loadTrack(0);
+}
+
+document.getElementById("refreshFolder").addEventListener("click", () => {
+    if (musicFolderHandle) {
+        loadFolder();
+    } else {
+        alert("Pick a Folder first");
+    }
 });
 
 function savePlaylistVisibility() {
