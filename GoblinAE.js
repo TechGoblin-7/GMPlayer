@@ -94,6 +94,37 @@ function playTrack(index) {
     updateNowPlaying(track);
 
     highlightActive();
+    
+    if ('mediaSession' in navigator) {
+        navigator.mediaSession.metadata = new MediaMetadata({
+            title: track.name,
+            artist: "GMPlayer",
+            album: "Local Files",
+            artwork: [
+                { src: "assets/Goblinapplogo.png", sizes: "192x192", type: "image/png" },
+                { src: "assets/Digital Jolly Roger.png", sizes: "512x512", type: "image/png"}
+            ]
+        });
+        
+        navigator.mediaSession.setActionHandler('play', () => {
+            audio.play();
+        });
+
+        navigator.mediaSession.setActionHandler('pause', () => {
+            audio.pause();
+        });
+
+        navigator.mediaSession.setActionHandler('nexttrack', () => {
+            nextBtn.click();
+        
+        });
+
+        navigator.mediaSession.setActionHandler('previoustrack', () => {
+            prevBtn.click();
+        });
+    }
+
+
 }
 
 audio.addEventListener("timeupdate", function () {
